@@ -1,0 +1,81 @@
+
+.filter{
+    background-color: rgb(255, 236, 126);
+    font-size: 2rem;
+    text-align: center;
+}
+
+.red{
+    color: red;
+    padding: 50px;
+}
+.green{
+    color: rgb(29, 238, 10);
+    padding: 50px;
+}
+
+.purple{
+    color: purple;
+    padding: 50px;
+}
+
+.pink{
+    color: rgb(235, 14, 135);
+    padding: 50px;
+}
+
+.orange{
+    color: rgb(255, 153, 0);
+    padding: 50px;
+}
+
+.blue{
+    color: blue;
+    padding: 50px;
+}
+
+.navbar{
+    width: 3rem;
+    height: 100vh;
+    position: fixed;
+    background-color: rgb(255, 236, 126);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    text-align: center;
+    font-size: 2rem;
+    z-index: 2;
+}
+
+ul.container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+   list-style-type: none;
+   margin: 0;
+   padding: 0;
+   position: relative;
+}
+
+.container{
+    background-color: aqua;
+    text-align: center;
+    width: 1800px;
+}
+
+.vinyls{
+    background-color: aqua;
+    text-align: center;
+}
+
+.song-image{
+    width: 16rem;
+    height: 16rem;
+}
+
+.is-hidden {
+    display: none;
+ }
+ 
+ .is-active {
+    font-weight: 900;
+ }
+ 
