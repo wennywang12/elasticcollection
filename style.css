@@ -47,19 +47,28 @@
 }
 
 ul.container{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
    list-style-type: none;
    margin: 0;
    padding: 0;
-   position: relative;
+   position: absolute;
 }
 
 .container{
-    background-color: aqua;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    background-color: rgb(252, 249, 249);
     text-align: center;
-    width: 1800px;
+    width: 100%;
+    height: 105rem;
 }
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  
 
 .vinyls{
     background-color: aqua;

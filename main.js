@@ -51,7 +51,54 @@ function consoleLogSongs() {
     console.log("showSongs()");
     songs.forEach((song) => {
       
-        //var songTitle = document.createElement("h1");
+
+       var msnry = new Masonry('.container', { itemSelector: '.song-container' });
+
+        var songContainer = document.createElement("li");
+        songContainer.classList.add("song-container");
+        document.querySelector(".container").append(songContainer);
+
+        var diamater=Math.floor(Math.random() * 300) + 200;
+        console. log('diamater'+diamater)
+
+        var songImage = document.createElement("img");
+        songImage.src = song.fields.vinyls[0].url;
+        songImage.style.height = diamater +"px";
+        songImage.style.width = diamater +"px";
+        songContainer.append(songImage);
+
+  
+
+        var songGenre = song.fields.main_color;
+        songGenre.forEach(function(genre) {
+        songContainer.classList.add(genre);
+         });
+
+
+         var filterPop = document.querySelector(".blue");
+         filterPop.addEventListener("click", function() {
+          if (songContainer.classList.contains("Blue")) {
+            container.style.background = "blue";
+          } else {
+            songContainer.style.background = "white";
+            songContainer.style.display = "none";
+          }
+        });
+
+
+        var filterPop = document.querySelector(".green");
+        filterPop.addEventListener("click", function() {
+         if (songContainer.classList.contains("Green")) {
+           container.style.background = "green";
+         } else {
+           songContainer.style.background = "white";
+           songContainer.style.display = "none";
+         }
+       });
+
+
+        
+    //var songTitle = document.createElement("h1");
         //songTitle.innerText = song.fields.title;
         //document.body.append(songTitle);
 
@@ -75,33 +122,6 @@ function consoleLogSongs() {
           //document.querySelector(".vinyls").add(color)
        //});
 
-        var songContainer = document.createElement("li");
-        songContainer.classList.add("song-container");
-        document.querySelector(".container").append(songContainer);
-
-        var diamater=Math.floor(Math.random() * 400) + 100;
-        console. log('diamater'+diamater)
-       
-
-        var songImage = document.createElement("img");
-        
-        songImage.src = song.fields.vinyls[0].url;
-        songImage.style.height = diamater +"px";
-        songImage.style.width = diamater +"px";
-        songContainer.append(songImage);
-
-       
-
-
-
-        var songGenre = song.fields.main_color;
-        songGenre.forEach(function(genre) {
-        songContainer.classList.add(genre);
-         });
-
-        
-
-
 
          //var filterPop = document.querySelector(".blue");
          //filterPop.addEventListener("click", function() {
@@ -109,29 +129,8 @@ function consoleLogSongs() {
          //   card.classList.add('is-hidden');
           //} else {
          //   card.classList.remove('is-hidden')};
-        
-
-
-          
-
-        //var songColor = song.fields.main_color;
-        //songColor.forEach(function(color){
-          //document.classList.add(color)
-        //})
-
       
 
-     
-
-
-   // var array = ["songImage"];
-   // array.forEach(function(song) {
-    //var img = document.createElement('img');
-   //img.src = song.fields.vinyls[0].url;
-  // var diameter = Math.random() * 100 window.innerWidth;
-   //img.style.height = diamater;
-  //img.style.width = diamater;
- // })
 
         //var songGenre = song.fields.main_color;
         //songGenre.forEach(function(genre){
@@ -139,6 +138,45 @@ function consoleLogSongs() {
         //})
 
 
-
     });
   }
+
+  var canvas = document.querySelector('canvas');
+  var ctx = canvas.getContext('2d');
+  
+  
+  function Pixel( x, y ) {
+    this.x = x;
+    this.y = y;
+    this.hue = Math.floor( Math.random() * 360 );
+    var direction = Math.random() > 0.5 ? -1 : 1;
+    this.velocity = ( Math.random() * 30 + 20 ) * 0.01 * direction;
+  }
+  
+  Pixel.prototype.update = function() {
+    this.hue += this.velocity;
+  };
+  
+  Pixel.prototype.render = function( ctx ) {
+    var hue = Math.round( this.hue );
+    ctx.fillStyle = 'hsl(' + hue + ', 100%, 50% )';
+    ctx.fillRect( this.x, this.y, 1, 1 );
+  }
+  
+  var pixels = [
+    new Pixel( 0, 0 ),
+    new Pixel( 1, 0 ),
+    new Pixel( 0, 1 ),
+    new Pixel( 1, 1 ),
+  ];
+  
+  function animate() {
+    pixels.forEach( function( pixel ) {
+      pixel.update();
+      pixel.render( ctx );
+    });
+    requestAnimationFrame( animate );
+  }
+  
+  animate();
+  
