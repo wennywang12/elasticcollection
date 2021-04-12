@@ -51,6 +51,7 @@ function consoleLogSongs() {
     console.log("showSongs()");
     songs.forEach((song) => {
       
+    
 
        var msnry = new Masonry('.container', { itemSelector: '.song-container' });
 
@@ -67,18 +68,19 @@ function consoleLogSongs() {
         songImage.style.width = diamater +"px";
         songContainer.append(songImage);
 
-  
+
 
         var songGenre = song.fields.main_color;
         songGenre.forEach(function(genre) {
         songContainer.classList.add(genre);
          });
 
-
+    
          var filterPop = document.querySelector(".blue");
          filterPop.addEventListener("click", function() {
           if (songContainer.classList.contains("Blue")) {
-            container.style.background = "blue";
+            //container.style.background = "blue";
+            songContainer.classList.add('background1')
           } else {
             songContainer.style.background = "white";
             songContainer.style.display = "none";
@@ -86,8 +88,8 @@ function consoleLogSongs() {
         });
 
 
-        var filterPop = document.querySelector(".green");
-        filterPop.addEventListener("click", function() {
+        var changeGreen = document.querySelector(".green");
+        changeGreen.addEventListener("click", function() {
          if (songContainer.classList.contains("Green")) {
            container.style.background = "green";
          } else {
@@ -140,6 +142,9 @@ function consoleLogSongs() {
 
     });
   }
+
+  
+
 
   var canvas = document.querySelector('canvas');
   var ctx = canvas.getContext('2d');
