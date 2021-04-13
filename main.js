@@ -9,11 +9,8 @@ var base = new Airtable({ apiKey: "keyOJEyyrzK4Zgs8e" }).base(
 
   base("Vinyls").select({}).eachPage(gotPageOfSongs, gotAllSongs);
 
-  // an empty array to hold our song data
  var songs = [];
 
-
-// callback function that receives our data
  function gotPageOfSongs(records, fetchNextPage) {
     console.log("gotPageOfSongs()");
     // add the records from this page to our books array
@@ -26,14 +23,14 @@ var base = new Airtable({ apiKey: "keyOJEyyrzK4Zgs8e" }).base(
   // call back function that is called when all pages are loaded
 function gotAllSongs(err) {
     console.log("gotAllSongs()");
-  
+
     // report an error, you'd want to do something better than this in production
     if (err) {
       console.log("error loading data");
       console.error(err);
       return;
     }
-  
+
     // call functions to log and show the books
     consoleLogSongs();
     showSongs();
@@ -46,18 +43,25 @@ function consoleLogSongs() {
       console.log("Song:", song);
     });
   }
-  
+
   function showSongs() {
     console.log("showSongs()");
     songs.forEach((song) => {
-      
-    
 
-       var msnry = new Masonry('.container', { itemSelector: '.song-container' });
+
+        //var songTitle = document.createElement("h1");
+        //songTitle.innerText = song.fields.title;
+        //document.body.append(songTitle);
+
+        //var nameOfAlbum = document.createElement("h2");
+        //nameOfAlbum.innerText = song.fields.album;
+        //document.body.append(nameOfAlbum);
 
         var songContainer = document.createElement("li");
         songContainer.classList.add("song-container");
+        dragElement(songContainer);
         document.querySelector(".container").append(songContainer);
+
 
         var diamater=Math.floor(Math.random() * 300) + 200;
         console. log('diamater'+diamater)
@@ -66,6 +70,14 @@ function consoleLogSongs() {
         songImage.src = song.fields.vinyls[0].url;
         songImage.style.height = diamater +"px";
         songImage.style.width = diamater +"px";
+
+
+        //var songImage = document.createElement("img");
+        //songImage.classList.add("song-image");
+        //songImage.src = song.fields.main_color[0].url;
+        //document.querySelector(".container").append(songImage);
+
+
         songContainer.append(songImage);
 
 
@@ -75,113 +87,145 @@ function consoleLogSongs() {
         songContainer.classList.add(genre);
          });
 
-    
-         var filterPop = document.querySelector(".blue");
-         filterPop.addEventListener("click", function() {
-          if (songContainer.classList.contains("Blue")) {
-            //container.style.background = "blue";
-            songContainer.classList.add('background1')
-          } else {
-            songContainer.style.background = "white";
-            songContainer.style.display = "none";
-          }
+
+
+    });
+    var msnry = new Masonry('.container', { itemSelector: '.song-container' });
+
+    var filterBlue = document.querySelector(".blue");
+    filterBlue.addEventListener("click", function() {
+      document.querySelectorAll("img").forEach((i) => {
+        i.style.height = "";
+        i.style.width = "";
         });
-
-
-        var changeGreen = document.querySelector(".green");
-        changeGreen.addEventListener("click", function() {
-         if (songContainer.classList.contains("Green")) {
-           container.style.background = "green";
-         } else {
-           songContainer.style.background = "white";
-           songContainer.style.display = "none";
-         }
-       });
-
-
-        
-    //var songTitle = document.createElement("h1");
-        //songTitle.innerText = song.fields.title;
-        //document.body.append(songTitle);
-
-        //var nameOfAlbum = document.createElement("h2");
-        //nameOfAlbum.innerText = song.fields.album;
-        //document.body.append(nameOfAlbum);
-
-
-        //var songImage = document.createElement("img");
-        //songImage.classList.add("song-image");
-        //songImage.src = song.fields.vinyls[0].url;
-        //document.querySelector(".vinyls").append(songImage);
-
-        //var songColor = document.createElement("h2");
-        //songColor.innerText = song.fields.main_color;
-        //document.querySelector(".vinyls").append(songColor);
-
-
-        //var songColor = song.fields.main_color;
-        //songColor.forEach(function(color) {
-          //document.querySelector(".vinyls").add(color)
-       //});
-
-
-         //var filterPop = document.querySelector(".blue");
-         //filterPop.addEventListener("click", function() {
-         // if (songContainer.classList.contains("blue")) {
-         //   card.classList.add('is-hidden');
-          //} else {
-         //   card.classList.remove('is-hidden')};
-      
-
-
-        //var songGenre = song.fields.main_color;
-        //songGenre.forEach(function(genre){
-            //document.classlist.add(genre);
-        //})
-
-
+      document.body.style.backgroundColor = "blue";
+      document.body.style.backgroundImage = "none";
+      document.querySelectorAll(".song-container").forEach((container) => container.style.display = "none");
+document.querySelectorAll(".Blue").forEach((container) => container.style.display = "");
     });
-  }
 
-  
-
-
-  var canvas = document.querySelector('canvas');
-  var ctx = canvas.getContext('2d');
-  
-  
-  function Pixel( x, y ) {
-    this.x = x;
-    this.y = y;
-    this.hue = Math.floor( Math.random() * 360 );
-    var direction = Math.random() > 0.5 ? -1 : 1;
-    this.velocity = ( Math.random() * 30 + 20 ) * 0.01 * direction;
-  }
-  
-  Pixel.prototype.update = function() {
-    this.hue += this.velocity;
-  };
-  
-  Pixel.prototype.render = function( ctx ) {
-    var hue = Math.round( this.hue );
-    ctx.fillStyle = 'hsl(' + hue + ', 100%, 50% )';
-    ctx.fillRect( this.x, this.y, 1, 1 );
-  }
-  
-  var pixels = [
-    new Pixel( 0, 0 ),
-    new Pixel( 1, 0 ),
-    new Pixel( 0, 1 ),
-    new Pixel( 1, 1 ),
-  ];
-  
-  function animate() {
-    pixels.forEach( function( pixel ) {
-      pixel.update();
-      pixel.render( ctx );
+    var filterPink = document.querySelector(".pink");
+    filterPink.addEventListener("click", function() {
+      document.querySelectorAll("img").forEach((i) => {
+        i.style.height = "";
+        i.style.width = "";
+        });
+      document.body.style.backgroundColor = "pink";
+      document.body.style.backgroundImage = "none";
+      document.querySelectorAll(".song-container").forEach((container) => container.style.display = "none");
+document.querySelectorAll(".Pink").forEach((container) => container.style.display = "");
     });
-    requestAnimationFrame( animate );
+
+
+var filterHome = document.querySelector(".home");
+    filterHome.addEventListener("click", function() {
+      document.querySelectorAll("img").forEach((i) => {
+        i.style.width = `${Math.floor(Math.random() * 300) + 200}px`;
+        });
+      document.body.style.backgroundImage = "linear-gradient(to bottom right, blue, lightgreen, Red, pink, yellow, orange, purple)";
+    document.querySelectorAll(".song-container").forEach((container) => container.style.display = "");
+  });
+
   }
-  
-  animate();
-  
+
+
+  var filterGreen = document.querySelector(".green");
+  filterGreen.addEventListener("click", function() {
+    document.querySelectorAll("img").forEach((i) => {
+      i.style.height = "";
+      i.style.width = "";
+      });
+    document.body.style.backgroundColor = "lightgreen";
+    document.body.style.backgroundImage = "none";
+    document.querySelectorAll(".song-container").forEach((container) => container.style.display = "none");
+document.querySelectorAll(".Green").forEach((container) => container.style.display = "");
+  });
+
+  var filterRed = document.querySelector(".red");
+  filterRed.addEventListener("click", function() {
+    document.querySelectorAll("img").forEach((i) => {
+      i.style.height = "";
+      i.style.width = "";
+      });
+    document.body.style.backgroundColor = "red";
+    document.body.style.backgroundImage = "none";
+    document.querySelectorAll(".song-container").forEach((container) => container.style.display = "none");
+document.querySelectorAll(".Red").forEach((container) => container.style.display = "");
+  });
+
+  var filterOrange = document.querySelector(".orange");
+  filterOrange.addEventListener("click", function() {
+    document.querySelectorAll("img").forEach((i) => {
+      i.style.height = "";
+      i.style.width = "";
+      });
+    document.body.style.backgroundColor = "orange";
+    document.body.style.backgroundImage = "none";
+    document.querySelectorAll(".song-container").forEach((container) => container.style.display = "none");
+document.querySelectorAll(".Orange").forEach((container) => container.style.display = "");
+  });
+
+  var filterPurple = document.querySelector(".purple");
+  filterPurple.addEventListener("click", function() {
+    document.querySelectorAll("img").forEach((i) => {
+      i.style.height = "";
+      i.style.width = "";
+      });
+    document.body.style.backgroundColor = "purple";
+    document.body.style.backgroundImage = "none";
+    document.querySelectorAll(".song-container").forEach((container) => container.style.display = "none");
+document.querySelectorAll(".Purple").forEach((container) => container.style.display = "");
+  });
+
+function dragElement(dragItem) {
+	const container = document.querySelector('.container');
+	let active = false;
+	let initialX;
+	let initialY;
+	let currentX;
+	let currentY;
+	let xOffset = 0;
+	let yOffset = 0;
+
+	container.addEventListener("touchstart", dragStart, false);
+	container.addEventListener("touchend", dragEnd, false);
+	container.addEventListener("touchmove", drag, false);
+	container.addEventListener("mousedown", dragStart, false);
+	container.addEventListener("mouseup", dragEnd, false);
+	container.addEventListener("mousemove", drag, false);
+
+	function dragStart(event) {
+		if (event.type === "touchstart") {
+			initialX = event.touches[0].clientX - xOffset;
+			initialY = event.touches[0].clientY - yOffset;
+		} else {
+			initialX = event.clientX - xOffset;
+			initialY = event.clientY - yOffset;
+		}
+		if (event.target === dragItem || event.target.parentNode === dragItem) {
+			active = true;
+		}
+	}
+
+	function dragEnd(event) {
+		initialX = currentX;
+		initialY = currentY;
+		active = false;
+	}
+
+	function drag(event) {
+		if (active) {
+			event.preventDefault();
+			if (event.type === "touchmove") {
+				currentX = event.touches[0].clientX - initialX;
+				currentY = event.touches[0].clientY - initialY;
+			} else {
+				currentX = event.clientX - initialX;
+				currentY = event.clientY - initialY;
+			}
+			xOffset = currentX;
+			yOffset = currentY;
+			dragItem.style.transform = `translate(${currentX}px, ${currentY}px)`;
+		}
+	}
+}

@@ -91,6 +91,7 @@ function consoleLogSongs() {
     });
     var msnry = new Masonry('.container', { itemSelector: '.song-container' });
 
+
     var filterBlue = document.querySelector(".blue");
     filterBlue.addEventListener("click", function() {
       document.querySelectorAll("img").forEach((i) => {
@@ -176,16 +177,18 @@ document.querySelectorAll(".Orange").forEach((container) => container.style.disp
 document.querySelectorAll(".Purple").forEach((container) => container.style.display = "");
   });
 
-  dragElement(document.querySelectorAll(".song-container"));
 
-  function dragElement(elmnt) {
+ /* dragElement(document.querySelectorAll(".song-container")); */
+ /* document.querySelectorAll("songImage").forEach((e) => dragElement(e)); 
+
+ /* function dragElement(elmnt) {
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     if (document.querySelector(elmnt.div + "header")) {
       /* if present, the header is where you move the DIV from:*/
-       document.querySelector(elmnt.div + "header").onmousedown = dragMouseDown;
+       /* document.querySelector(elmnt.div + "header").onmousedown = dragMouseDown;
     } else {
       /* otherwise, move the DIV from anywhere inside the DIV:*/
-       elmnt.onmousedown = dragMouseDown;
+      /*  elmnt.onmousedown = dragMouseDown;
     }
   
     function dragMouseDown(e) {
@@ -214,11 +217,63 @@ document.querySelectorAll(".Purple").forEach((container) => container.style.disp
   
     function closeDragElement() {
       /* stop moving when mouse button is released:*/
-       document.onmouseup = null;
+      /*  document.onmouseup = null;
       document.onmousemove = null;
     }
   }
+  */
 
+
+  document.querySelectorAll(".song-container").forEach((e) => dragElement(e));
+
+  function dragElement(dragItem) {
+    const container = document.querySelector('.container');
+    let active = false;
+    let initialX;
+    let initialY;
+    let currentX;
+    let currentY;
+    let xOffset = 0;
+    let yOffset = 0;
+    container.addEventListener("touchstart", dragStart, false);
+    container.addEventListener("touchend", dragEnd, false);
+    container.addEventListener("touchmove", drag, false);
+    container.addEventListener("mousedown", dragStart, false);
+    container.addEventListener("mouseup", dragEnd, false);
+    container.addEventListener("mousemove", drag, false);
+    function dragStart(event) {
+      if (event.type === "touchstart") {
+        initialX = event.touches[0].clientX - xOffset;
+        initialY = event.touches[0].clientY - yOffset;
+      } else {
+        initialX = event.clientX - xOffset;
+        initialY = event.clientY - yOffset;
+      }
+      if (event.target === dragItem || event.target.parentNode === dragItem) {
+        active = true;
+      }
+    }
+    function dragEnd(event) {
+      initialX = currentX;
+      initialY = currentY;
+      active = false;
+    }
+    function drag(event) {
+      if (active) {
+        event.preventDefault();
+        if (event.type === "touchmove") {
+          currentX = event.touches[0].clientX - initialX;
+          currentY = event.touches[0].clientY - initialY;
+        } else {
+          currentX = event.clientX - initialX;
+          currentY = event.clientY - initialY;
+        }
+        xOffset = currentX;
+        yOffset = currentY;
+        dragItem.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      }
+    }
+  }
 
 /*(function(elementSelector) {
   var dragStartX, dragStartY; var objInitLeft, objInitTop;
@@ -237,3 +292,4 @@ document.querySelectorAll(".Purple").forEach((container) => container.style.disp
   document.addEventListener("mouseup", function(e) {inDrag = false;});
 }(".song-container"))
 */
+
