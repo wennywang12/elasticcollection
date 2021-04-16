@@ -11,7 +11,7 @@ body{
   }
 
 .filter{
-    background-color: rgb(255, 236, 126);
+    background-color:rgb(250, 236, 160);
     position: fixed;
     font-size: 3rem;
     text-align: center;
@@ -70,7 +70,7 @@ body{
     width: 3rem;
     height: 100vh;
     position: fixed;
-    background-color: rgb(255, 236, 126);
+    background-color: rgb(250, 236, 160);
     writing-mode: vertical-rl;
     text-orientation: mixed;
     text-align: center;
@@ -101,7 +101,7 @@ a:link {
     width: 3rem;
     height: 100vh;
     position: fixed;
-    background-color: rgb(255, 236, 126);
+    background-color: rgb(250, 236, 160);
     writing-mode: vertical-rl;
     text-orientation: mixed;
     text-align: center;
@@ -132,10 +132,6 @@ canvas {
   }
   
 
-.vinyls{
-    background-color: aqua;
-    text-align: center;
-}
 
 .song-image{
     width: 5rem;
@@ -153,7 +149,7 @@ canvas {
  height: 50px;	
  overflow: hidden;
  /*position: relative;*/
- background: rgb(255, 236, 126);
+ background: rgb(250, 236, 160);
  color: rgb(19, 18, 18);
  z-index: 2;
  position: fixed;
@@ -201,3 +197,37 @@ canvas {
 }
 
 
+@media only screen and (max-width: 767px) {
+    .filter{
+        background-color: rgb(255, 236, 126);
+        position: fixed;
+        font-size: 1rem;
+        text-align: center;
+        z-index: 2;
+    }
+
+    .home{
+        padding: 10px;
+    }
+    .red,.green,.blue,.orange,.purple,.purple,.pink {
+        padding: 8px;
+    }
+
+    .navbar{
+        margin-top: 9rem;
+        width: 1rem;
+        height: 50vh;
+        font-size: 1rem;
+    }
+  
+
+    .navbar2{
+        width: 1rem;
+        font-size: 1rem;
+    }
+
+    
+
+    }
+
+    rgb(255, 236, 126);

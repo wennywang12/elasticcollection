@@ -110,7 +110,7 @@ document.querySelectorAll(".Blue").forEach((container) => container.style.displa
         i.style.height = "";
         i.style.width = "";
         });
-      document.body.style.backgroundColor = "pink";
+      document.body.style.backgroundColor = "rgb(235, 14, 135)";
       document.body.style.backgroundImage = "none";
       document.querySelectorAll(".song-container").forEach((container) => container.style.display = "none");
 document.querySelectorAll(".Pink").forEach((container) => container.style.display = "");
@@ -135,7 +135,7 @@ var filterHome = document.querySelector(".home");
       i.style.height = "";
       i.style.width = "";
       });
-    document.body.style.backgroundColor = "lightgreen";
+    document.body.style.backgroundColor = "rgb(29, 238, 10)";
     document.body.style.backgroundImage = "none";
     document.querySelectorAll(".song-container").forEach((container) => container.style.display = "none");
 document.querySelectorAll(".Green").forEach((container) => container.style.display = "");
@@ -229,3 +229,4 @@ function dragElement(dragItem) {
 		}
 	}
 }
+
